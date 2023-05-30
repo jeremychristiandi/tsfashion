@@ -20,7 +20,7 @@
   <div class="row text-center">
       @foreach ($products as $p)
       <div class="col-md-4 my-3">
-          <div class="card" style=" margin: auto;">
+          <div class="card">
               <img src="https://source.unsplash.com/500x400?{{ $p->category }}" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title" style="text-transform: capitalize;">{{ $p->name }}</h5>
@@ -43,4 +43,9 @@
       @endforeach
   </div>
 </div>
+
+<div class="d-flex justify-content-center mt-3">
+  {{ $products->links() }}
+</div>
+
 @endsection

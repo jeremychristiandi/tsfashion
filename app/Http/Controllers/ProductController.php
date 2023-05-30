@@ -5,18 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
         $products = Product::latest();
 
+        // if(request("search")) {
+        //     $products = Product::latest()->where("name", "like", "%" . request("search") . "%");
+        // }
+
         return view("components/products", [
-            "products" => $products->get()
+            // "products" => $products->get()
+            "products" => Product::latest()->filter(request(["search"]))->paginate(9)->withQueryString()
         ]);
     }
 
@@ -62,7 +69,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return view("product", [
+        return view("components/product", [
             "product" => $product
         ]);
     }

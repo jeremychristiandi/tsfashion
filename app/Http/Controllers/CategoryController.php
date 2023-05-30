@@ -16,10 +16,11 @@ class CategoryController extends Controller
 
     public function show(string $id) {
         // dd($id);
-        $products = Product::where("category_id", $id)->get();    
+        $products = Product::where("category_id", $id);
 
         return view("components/products", [
-            "products" => $products 
+            // "products" => $products 
+            "products" => $products->latest()->filter(request(["search"]))->paginate(9)
         ]);
     }
 }

@@ -2,10 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Product;
+use App\Models\User;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,16 +22,16 @@ use App\Http\Controllers\CategoryController;
 
 // Route::get("/", [ProductController::class, "index"]);
 Route::get("/", function() {
-    if(request("search")) {
-        $products->where("name", "like", "%" . request("search") . "%");
-    }
-    
     return view("home", [
-        "products" => Product::latest()->paginate(6)
+        "products" => Product::latest()->paginate(10)
     ]);
 });
 
 Route::resource("/products", ProductController::class)->middleware("auth");
+Route::get("/aboutus", function() {
+    return view("components/aboutus");
+});
+Route::get("/profile", [UserController::class, "index"])->middleware("auth");
 
 Route::get("/categories", [CategoryController::class, "index"]);
 Route::get("/categories/{id}", [CategoryController::class, "show"]);

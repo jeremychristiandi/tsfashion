@@ -1,16 +1,25 @@
-<nav class="navbar navbar-expand-lg" style="background-color: #ebebeb">
+<style>
+  .nav-item {
+    margin-right: 1rem;
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg" style="background-color: #e5e5e5">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">TS</a>
+      <a class="navbar-brand mx-3" href="#">TS</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown" style="width: 75%">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav mx-3">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/categories">Catalog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/products">Products</a>
           </li>
           @if (optional(Auth::user())->is_admin) 
             <li class="nav-item">
@@ -19,7 +28,7 @@
 
           @else
           <li class="nav-item">
-            <a class="nav-link" href="#">About Us</a>
+            <a class="nav-link" href="/aboutus">About Us</a>
           </li>
               
           @endif
@@ -30,7 +39,7 @@
             </a>
             <ul class="dropdown-menu">
               @auth
-              <li><a class="dropdown-item" href="/">My Profile</a></li>
+              <li><a class="dropdown-item" href="/profile">My Profile</a></li>
               <li>
                 <form action="/logout" method="post">
                   @csrf
@@ -46,8 +55,8 @@
         </ul>
       </div>
       <div class="container-fluid" style="width: 25%">
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
+        <form action="/products" class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" name="search" value="{{ request("search") }}">
           <button class="btn btn-outline-dark" type="submit">Search</button>
         </form>
       </div>
