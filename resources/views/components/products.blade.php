@@ -8,6 +8,12 @@
     </div>
 @endif
 
+@if (session()->has("cartFailed"))
+    <div class="alert alert-danger my-2" role="alert">
+      {{ session("cartFailed") }}
+    </div>
+@endif
+
 <div class="content">
   @if (optional(Auth::user())->is_admin)
         <div class="row text-center my-5">
@@ -20,7 +26,7 @@
   <div class="row text-center">
       @foreach ($products as $p)
       <div class="col-md-4 my-3">
-          <div class="card">
+          <div class="card" style="width: 18rem; height: 100%; margin: auto;">
               <img src="https://source.unsplash.com/500x400?{{ $p->category }}" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title" style="text-transform: capitalize;">{{ $p->name }}</h5>
@@ -35,7 +41,13 @@
                       </form>
                   </div>
                 @else
-                  <a href="/products/{{ $p->id }}" class="btn btn-primary">To product &#x279C;</a>
+                  <a href="/products/{{ $p->id }}" class="btn btn-primary mb-2">To product &#x279C;</a>
+                  <form action="/cart" method="post">
+                    @csrf
+                    <input type="hidden" name="product_id" value="{{ $p->id }}">
+                    <input type="hidden" name="quantity" value="1">
+                    <button class="btn btn-info text-white">Add to Cart &#x2738;</button>
+                  </form>
                 @endif
               </div>
             </div>

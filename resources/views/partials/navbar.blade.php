@@ -21,17 +21,22 @@
           <li class="nav-item">
             <a class="nav-link" href="/products">Products</a>
           </li>
-          @if (optional(Auth::user())->is_admin) 
+          @if (optional(Auth::user())->is_admin == 0)
+          <li class="nav-item">
+            <a class="nav-link" href="/cart">Cart</a>
+          </li>
+          @endif
+          {{-- @if (optional(Auth::user())->is_admin) 
             <li class="nav-item">
               <a class="nav-link" href="/products">My Products</a>
             </li>
 
-          @else
+          @else --}}
           <li class="nav-item">
             <a class="nav-link" href="/aboutus">About Us</a>
           </li>
               
-          @endif
+          {{-- @endif --}}
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

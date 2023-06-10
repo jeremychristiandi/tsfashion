@@ -74,7 +74,7 @@
                             <div class="card-body">
                               <h5 class="card-title" style="text-transform: capitalize;">{{ $p->name }}</h5>
                               <p class="card-text">{{ $p->description }}</p>
-                              <a href="#" class="btn btn-primary">To product &#x279C;</a>
+                              <a href="/products/{{ $p->id }}" class="btn btn-primary">To product &#x279C;</a>
                             </div>
                           </div>
                     </div>

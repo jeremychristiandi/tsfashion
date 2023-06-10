@@ -7,7 +7,7 @@
             <div class="row">
                 @foreach ($categories as $category)
                 <div class="col-md-4 my-3">
-                    <div class="card" style="width: 18rem; margin: auto;">
+                    <div class="card" style="width: 18rem; height: 100%; margin: auto;">
                         <img src="https://source.unsplash.com/500x400?{{ $category->name }}" class="card-img-top" alt="...">
                         <div class="card-body">
                           <h5 class="card-title" style="text-transform: capitalize;">{{ $category->name }}</h5>
